@@ -1,0 +1,46 @@
+name: Deploy to Databricks
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Bundle target (dev / prod)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - prod
+
+env:
+  DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@v1
+        with:
+          version: 0.236.0
+
+      - name: Remove CLI install artifacts
+        run: rm -f databricks_cli_*.zip
+
+      - name: Validate bundle
+        run: |
+          TARGET="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target || 'dev' }}"
+          databricks bundle validate -t "$TARGET" --var "databricks_host=${{ vars.DATABRICKS_HOST }}"
+
+      - name: Deploy bundle
+        run: |
+          TARGET="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target || 'dev' }}"
+          databricks bundle deploy -t "$TARGET" --var "databricks_host=${{ vars.DATABRICKS_HOST }}"

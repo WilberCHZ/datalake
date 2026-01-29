@@ -1,0 +1,28 @@
+# Databricks
+.databricks/
+*.dbchain
+databricks_cli_*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local bundle overrides (optional)
+*.local.yml
+variable-overrides.json
