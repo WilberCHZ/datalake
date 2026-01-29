@@ -2,9 +2,7 @@ name: Deploy to Databricks
 
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [main, master]
   workflow_dispatch:
     inputs:
       target:
@@ -12,28 +10,24 @@ on:
         required: true
         default: 'dev'
         type: choice
-        options:
-          - dev
-          - prod
-
-env:
-  DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        options: [dev, prod]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: DATABRICKS_HOST   # 👈 CLAVE
+
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
         with:
           version: 0.236.0
-
-      - name: Remove CLI install artifacts
-        run: rm -f databricks_cli_*.zip
 
       - name: Validate bundle
         run: |
