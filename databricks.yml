@@ -20,5 +20,5 @@ resources:
         - task_key: run_gold_reporting
           job_cluster_key: main
           notebook_task:
-            notebook_path: empresa/gold/sap/gld_reporting_salarioxempresa_ddl
+            notebook_path: empresa/gold/sap/gld_reporting_salarioxempresa_ddl.ipynb.py
           max_retries: 1
