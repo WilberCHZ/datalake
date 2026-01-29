@@ -1,6 +1,7 @@
 # Databricks notebook source
 # Databricks notebook source
 # Este es un cambio
+# Este es otro cambio
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType,StructField,StringType
 
