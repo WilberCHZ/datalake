@@ -4,17 +4,7 @@ bundle:
 targets:
   dev:
     default: true
-    workspace:
-      host: ${var.databricks_host}
-
-  prod:
-    workspace:
-      host: ${var.databricks_host}
-
-variables:
-  databricks_host:
-    description: URL del workspace Databricks
-    default: "https://adb-7405614492504348.8.azuredatabricks.net"
+  prod: {}
 
 resources:
   jobs:

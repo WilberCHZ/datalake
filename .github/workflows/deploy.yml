@@ -38,9 +38,9 @@ jobs:
       - name: Validate bundle
         run: |
           TARGET="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target || 'dev' }}"
-          databricks bundle validate -t "$TARGET" --var "databricks_host=${{ vars.DATABRICKS_HOST }}"
+          databricks bundle validate -t "$TARGET"
 
       - name: Deploy bundle
         run: |
           TARGET="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target || 'dev' }}"
-          databricks bundle deploy -t "$TARGET" --var "databricks_host=${{ vars.DATABRICKS_HOST }}"
+          databricks bundle deploy -t "$TARGET"

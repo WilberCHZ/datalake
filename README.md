@@ -25,4 +25,4 @@ Configura en tu repositorio de GitHub:
 - `databricks.yml`: bundle y job `Empresa Gold Reporting`.
 - `.github/workflows/deploy.yml`: workflow de validación y despliegue.
 
-Antes de desplegar, actualiza `vars.databricks_host` en `databricks.yml` con tu workspace o pasa el host solo por variable `DATABRICKS_HOST` en GitHub (el workflow usa `--var databricks_host=...`).
+El workspace se toma de `DATABRICKS_HOST`; no hace falta configurar host en el bundle.
