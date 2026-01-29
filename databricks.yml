@@ -11,8 +11,10 @@ targets:
     workspace:
       host: ${var.databricks_host}
 
-vars:
-  databricks_host: "https://your-workspace.cloud.databricks.com"
+variables:
+  databricks_host:
+    description: URL del workspace Databricks
+    default: "https://adb-7405614492504348.8.azuredatabricks.net"
 
 resources:
   jobs:
